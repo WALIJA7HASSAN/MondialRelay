@@ -525,6 +525,7 @@ white-space: nowrap;
 }
 .delivery-methods{
   padding: 15px;
+  display: none;
  
 
 }
@@ -818,6 +819,95 @@ padding-left: 10px
 }
 .delivery-info-active{
   display: block;
+}
+.delivery-point{
+  padding: 15px;
+  display: none;
+}
+.delivery-point> div {
+  display: grid;
+  margin: 10px 0;
+}
+.delivery-point fieldset {
+  border:1px solid #B5B4B4;
+  border-radius: 7px;
+  margin-bottom: 1rem;
+  
+}
+.delivery-point fieldset select,.delivery-point fieldset input{
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 7px;
+  border-color: transparent;
+}
+.delivery-point fieldset:first-child{
+  display: flex;
+  align-items: center;
+}
+.delivery-point fieldset span{
+  background: #96154A;
+  color: white;
+  transition: all .5s ease;
+  border-radius: 50%;
+  padding: 8px;
+  margin-right: 10px;
+}
+.delivery-point fieldset input::placeholder{
+  font-style: italic;
+  font-size: 16px;
+  color: #B5B4B4;
+}
+.delivery-point fieldset select:focus{
+  outline: none;
+}
+.v-fieldset-lg{
+  display: none;
+}
+.v-find-btn,.v-loc-btn{
+  display: none;
+  border: 1px solid #96154A;
+  transition: all .5s ease;
+  background: transparent;
+  max-height: fit-content;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+}
+.v-loc-btn i{
+  font-size: 30px;
+}
+.v-loc-btn{
+  padding: 8px !important;
+}
+.v-find-btn{
+  padding: 15px !important;
+}
+.v-find-btn,.v-loc-btn:hover{
+  color: white;
+  background: #96154A;
+}
+.v-find-btn:hover,.v-loc-btn{
+  color: #96154A;
+  background: transparent;
+}
+.valid-result-p{
+  font-size: 16px;
+}
+.validation-btn{
+  color: white;
+  background: #96154A;
+  padding: 20px 10px;
+  border-radius: 10px;
+  border: 2px solid #96154A ;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all .5s ease;
+  width: 100%;
+}
+.validation-btn:hover{
+  background: transparent;
+  color: #96154A;
 }
 /* services */
 .services-container{
@@ -1303,11 +1393,39 @@ color: #96154A;
   .dimension-modal {
     background: rgba(50, 50, 93, 0.6);
   }
+  .delivery-point  .city-or-postal-code-fieldset {
+    display: none !important;
+  }
+  .delivery-point >div{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    gap: 1rem;
+  }
+  .postal-code-fieldset{
+    grid-column: 1 / span 3;
+  }
+  .city-fieldset{
+    grid-column: 4 / span 4;
+  }
+  .country-fieldset{
+    grid-column: 8 / span 2;
+  }
+  .v-find-btn{
+    grid-column: 10 / span 1;
+    display: block;
+  }
+  .v-loc-btn{
+    grid-column: 11 / span 2;
+    display: block;
+  }
+  .v-fieldset-lg{
+    display: block;
+  }
 }
 
 @media screen and (min-width:1024px) {
   .section{
-    padding-inline: 0px;
+    padding-inline: 15px;
   }
   .footer-top{
     background: url('./Assets/footer_img.png') no-repeat top center/contain;

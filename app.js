@@ -205,7 +205,7 @@ destinationCountrySelect.addEventListener('change', () => {
   destinationCell.textContent = selectedOption.textContent; 
 });
 
-// Update Weight on input
+// Update Weight on input and displaying point and methods
 weightInputVal.addEventListener('input', () => {
   const weightValue = weightInput.value.trim();
   
@@ -215,13 +215,38 @@ weightInputVal.addEventListener('input', () => {
   // Get the alert div
   const weightExceedAlert = document.getElementById('weight-exceed-alert');
   
-  // Check the weight value and toggle alert display
-  if (weightValue && parseFloat(weightValue) > 30) {
-    weightExceedAlert.style.display = 'block';
+  // Get the delivery methods div
+  const deliveryMethods = document.querySelector('.delivery-methods');
+  
+  // Get the delivery point section
+  const deliveryPointSection = document.querySelector('.delivery-point.section');
+
+  if (weightValue) {
+    const numericWeight = parseFloat(weightValue);
+    
+    // Toggle weight exceed alert display
+    if (numericWeight > 30) {
+      weightExceedAlert.style.display = 'block';
+      deliveryMethods.style.display = 'none'; // Hide delivery methods for weight > 30
+      deliveryPointSection.style.display = 'none'; // Hide delivery point section
+    } else if (numericWeight >= 1 && numericWeight <= 30) {
+      weightExceedAlert.style.display = 'none'; // Hide alert for weight <= 30
+      deliveryMethods.style.display = 'block'; // Show delivery methods for valid weight
+      deliveryPointSection.style.display = 'block'; // Show delivery point section
+    } else {
+      weightExceedAlert.style.display = 'none'; // Hide alert for invalid weight
+      deliveryMethods.style.display = 'none';  // Hide delivery methods for invalid weight
+      deliveryPointSection.style.display = 'none'; // Hide delivery point section for invalid weight
+    }
   } else {
+    // Reset if no valid input
     weightExceedAlert.style.display = 'none';
+    deliveryMethods.style.display = 'none';
+    deliveryPointSection.style.display = 'none';
   }
 });
+
+
 
 
 // compensator
