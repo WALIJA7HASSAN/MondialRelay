@@ -156,7 +156,7 @@
         </fieldset>
         <fieldset class="form-group weight-selector">
           <legend for="weight">Poids*</legend>
-          <input type="text" id="weight" placeholder="Poids*">
+          <input type="number" id="weight" placeholder="Poids*" min="1">
           <span>Kg</span>
       </fieldset>
        
@@ -165,6 +165,30 @@
         </form>
         <p class="dimension-modal-toggler"><i class="ri-information-line"></i><span>Poids & Dimensions</span></p>
        </div>
+       <div id="weight-exceed-alert">
+
+         <div class="weight-alert">
+          <span><i class="ri-information-line"></i></span>
+          <p>Le poids du colis est supérieur à 30kg, envoi en Point Relais® uniquement.</p>
+        </div>
+        <h3 class="parcel-h3"><img src="./Assets/ot-shipping.svg" width="30px" alt="">Mon mode de livraison *</h3>
+       </div>
+      <div class="delivery-methods">
+        <h3 class="parcel-h3"><img src="./Assets/ot-shipping.svg" width="30px" alt="">Mon mode de livraison *</h3>
+        <div>
+          <div class="delivery-method delivery-method-active">
+            <img src="./Assets/mode_locker.svg" alt="">
+            <strong>Locker / Point Relais®</strong>
+            <p>3 jours ouvrés</p>
+          </div>
+          <div class="delivery-method ">
+            <img src="./Assets/mode_home.svg" alt="">
+            <strong>À domicile            </strong>
+            <p>3 jours ouvrés</p>
+          </div>
+        </div>
+       
+      </div>
        <div class="compensation-selector">
         <h3 class="parcel-h3"><img src="./Assets/parcel-icon.svg" width="24px" alt="">Indemnisation :</h3>
         <p>Votre colis est couvert à hauteur de <strong>25 €</strong> . Il a une valeur supérieure ? Choisissez le montant d'indemnisation souhaité.</p>

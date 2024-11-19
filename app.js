@@ -208,8 +208,21 @@ destinationCountrySelect.addEventListener('change', () => {
 // Update Weight on input
 weightInputVal.addEventListener('input', () => {
   const weightValue = weightInput.value.trim();
+  
+  // Update weight cell content
   weightCell.textContent = weightValue ? `${weightValue} kg` : '... kg'; 
+  
+  // Get the alert div
+  const weightExceedAlert = document.getElementById('weight-exceed-alert');
+  
+  // Check the weight value and toggle alert display
+  if (weightValue && parseFloat(weightValue) > 30) {
+    weightExceedAlert.style.display = 'block';
+  } else {
+    weightExceedAlert.style.display = 'none';
+  }
 });
+
 
 // compensator
 // Select elements
