@@ -97,3 +97,58 @@ window.addEventListener('resize', () => {
 if (window.innerWidth < 768) {
   removeActiveClasses();
 }
+
+// delivery options
+// document.querySelectorAll('.delivery-options fieldset').forEach((fieldset) => {
+//   fieldset.addEventListener('click', (event) => {
+//     // Check if the fieldset is not disabled
+//     if (!fieldset.hasAttribute('disabled')) {
+//       const radio = fieldset.querySelector('input[type="radio"]');
+//       if (radio) {
+//         radio.checked = true;
+//       }
+//     }
+//   });
+// });
+
+document.querySelectorAll('.delivery-options fieldset').forEach((fieldset) => {
+  fieldset.addEventListener('click', (event) => {
+    // Check if the fieldset is not disabled
+    if (!fieldset.hasAttribute('disabled')) {
+      const radio = fieldset.querySelector('input[type="radio"]');
+      if (radio) {
+        radio.checked = true;
+
+        // Toggle active info section based on the selected radio button
+        const recipientDetailsInfo = document.querySelector('.recipient-details-info');
+        const recipientChoiceInfo = document.querySelector('.recipient-choice-info');
+
+        // Hide both sections initially
+        recipientDetailsInfo.classList.remove('delivery-info-active');
+        recipientChoiceInfo.classList.remove('delivery-info-active');
+
+        // Show the relevant section based on the selected radio button
+        if (radio.id === 'recipient-details') {
+          recipientDetailsInfo.classList.add('delivery-info-active');
+        } else if (radio.id === 'recipient-choice') {
+          recipientChoiceInfo.classList.add('delivery-info-active');
+        }
+      }
+    }
+  });
+});
+
+
+document.querySelectorAll('.recipient-details-info .form-group input').forEach((input) => {
+  const legend = input.nextElementSibling; // Select the sibling legend
+  input.addEventListener('focus', () => {
+    if (legend) legend.style.display = 'block';
+  });
+  input.addEventListener('blur', () => {
+    if (legend) legend.style.display = 'none';
+  });
+});
+
+
+
+

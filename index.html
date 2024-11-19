@@ -84,9 +84,9 @@
       <h2>Se connecter <span id="connexion-form-close"><i class="ri-close-large-line"></i></span></h2>
       
       <label for="email">Adresse e-mail*</label>
-      <input type="email" name="email" id="email" placeholder="jeannedupont@exemple.com">
+      <input required type="email" name="email" id="email" placeholder="jeannedupont@exemple.com">
       <label for="password">Mot de passe*</label>
-      <input type="password" name="password" id="password" placeholder="******">
+      <input required type="password" name="password" id="password" placeholder="******">
       <a href="#" class="btn connecte-btn">
         <span>
           Connexion
@@ -99,9 +99,202 @@
     <p>Votre panier est actuellement vide</p>
     <a href="#">Voir mon panier</a>
    </div>
-
+   <!-- parcel steps -->
+   <div class="section parcel-details-header">
+     <div class="parcel-header-title">
+       <p><a href="#"><i class="ri-map-pin-line"></i> Accueil</a>/ <span>Envoi de colis entre particuliers</span></p>
+     <h2>Envoyer un colis</h2>
+     </div>
+     <div class="parcel-steps-container">
+      <div class="parcel-step">
+        <p>1</p>
+        <p><a href="#">Je prépare <br> mon envoi</a></p>
+    </div>
+    <div class="parcel-path"><i class="ri-arrow-right-line"></i></div>
+    <div class="parcel-step">
+        <p>2</p>
+        <p><a href="#">Je valide <br> mon panier</a></p>
+        
+    </div>
+    <div class="parcel-path"><i class="ri-arrow-right-line"></i></div>
+    <div class="parcel-step">
+        <p>3</p>
+        <p><a href="#">Je m'identifie</a></p>
+        
+    </div>
+    <div class="parcel-path"><i class="ri-arrow-right-line"></i></div>
+    <div class="parcel-step">
+        <p>4</p>
+        <p><a href="#">Je paie</a></p>
+        
+    </div>
+     
+     </div>
+  </div>
+   <!-- parcel details -->
+    <div class="section parcel-details-container">
+ 
+     <div class="parcel-form">
+       <!-- delivery options -->
+       <div class="delivery-options-container">
+        <h3 class="parcel-h3"><img src="./Assets/character.svg" width="22px" alt="">Mon destinataire</h3>
+        <form class="delivery-options">
+          <fieldset>
+            <input type="radio" name="delivery-option" id="recipient-details">
+          <label for="recipient-details">Je saisis les coordonnées de mon destinataire</label>
+          </fieldset>
+          
+          <fieldset>
+            <input type="radio" name="delivery-option" id="recipient-choice">
+          <label for="recipient-choice">Je laisse mon destinataire choisir son Locker | Point Relais® ou indiquer son adresse de livraison</label>
+          </fieldset>
+          
+         <fieldset disabled>
+          <input  type="radio" name="delivery-option" id="address-book">
+          <label for="address-book">Je cherche les coordonnées de mon destinataire dans mon carnet d'adresses</label>
+         </fieldset>
+        </form>
+        
+      </div>
+      <div class="delivery-info">
+        <div class="recipient-details-info ">
+          <p>
+            <strong>
+              Ces informations sont nécessaires pour faciliter et sécuriser le retrait du colis par votre destinataire.
+            </strong>
+          </p>
+          <form >
+            <fieldset class="form-group">
+              <input required type="text" id="name" placeholder="Nom*">
+              <legend for="name">Nom*</legend>
+            </fieldset>
+            <fieldset class="form-group">
+              <input required type="text" id="firstName" placeholder="Prénom*">
+              <legend for="firstName">Prénom*</legend>
+          </fieldset>
+            <fieldset class="form-group">
+              <input required type="email" id="email" placeholder="E-mail*">
+              <legend for="email">E-mail*</legend>
+          </fieldset>
+          
+          <fieldset class="form-group receipient-phone">
+              <select required id="countryCode">
+                  <option value="+33" selected>(FR) +33</option>
+                  <option value="+32">(BE) +32</option>
+    <option value="+34">(ES) +34</option>
+    <option value="+352">(LU) +352</option>
+    <option value="+351">(PT) +351</option>
+    <option value="+44">(GB) +44</option>
+    <option value="+39">(IT) +39</option>
+    <option value="+49">(DE) +49</option>
+    <option value="+43">(AT) +43</option>
+    <option value="+31">(NL) +31</option>
+    <option value="+377">(FR) +377</option>
+    <option value="+262">(RE) +262</option>
+    <option value="+596">(MQ) +596</option>
+    <option value="+590">(GP) +590</option>
+    <option value="+594">(GF) +594</option>
+    <option value="+48">(PL) +48</option>
+                  </select>
+                  <input required type="tel" id="phoneNumber" placeholder="Numéro de téléphone">
+              <legend for="countryCode">Indicatif</legend>
+          </fieldset>
+          
+          
+          <fieldset class="form-group">
+              <input required type="text" id="address" placeholder="Adresse" >
+              <legend for="address">Adresse*</legend>
+          </fieldset>
+          
+          <fieldset class="form-group">
+              <input type="text" id="addressComplement" placeholder="Complément d'adresse">
+              <legend for="addressComplement">Complément d'adresse</legend>
+          </fieldset>
+          
+          <div>
+            <fieldset class="form-group">
+              <input required type="text" id="postalCode" placeholder="Code Postal*">
+              <legend for="postalCode">Code Postal*</legend>
+          </fieldset>
+          
+          <fieldset class="form-group">
+              <input required type="text" id="city" placeholder="Ville*">
+              <legend for="city">Ville*</legend>
+          </fieldset>
+          </div>
+          
+          <fieldset  class="form-group recipient-lang-form-group">
+              <select required id="recipient-lang">
+                  <option value="fr" selected>Français</option>
+                  <option value="es">Espagnol</option>
+                  <option value="nl">Néerlandais</option>
+                  <option value="pt">Portugais</option>
+                  <option value="en">Anglais</option>
+                  </select>
+              <legend for="recipient-lang">Langue*</legend>
+          </fieldset>
+  
+          <fieldset class="address-book-radio">
+            <input type="radio" name="address-book" id="add-address-book">
+          <label for="add-address-book">Ajouter à mon carnet d'adresses</label>
+          </fieldset>
+          </form>
+          <div class="receipt-form-footer">
+  
+            <p >Les informations recueillies ne sont en aucun cas utilisées à des fins Commerciales ou Marketing. Pour en savoir plus sur les données personnelles, <a href="#">cliquez ici</a></p>
+            <div>
+              <span><i class="ri-information-line"></i></span>
+              <p>Pour que votre destinataire reçoive son code de retrait, merci de fournir une adresse e-mail et un numéro de portable valides.</p>
+            </div>
+          </div>
+        </div>
+        <div class="recipient-choice-info">
+          <p>
+            Si vous choisissez cette option, vous devrez finaliser votre parcours quand le destinataire aura choisi son point de livraison.
+          </p>
+          <div>
+            <p>Vous devez être connecté pour pouvoir utiliser cette fonctionnalité.</p>
+            <p>Cette fonction invitera le destinataire de votre colis à saisir ses coordonnées ainsi que le Point Relais® | Locker dans lequel il souhaite se faire livrer.
+            </p>
+            <p>S'il possède un compte chez nous et qu'il a configuré son Point Relais® | Locker favori, votre colis sera directement ajouté à votre panier.Dans le cas contraire, votre destinataire recevra un email accompagné de votre commentaire lorsque vous aurez validé votre colis.</p>
+          </div>
+        </div>
+        
+      </div>
+     </div>
+     <div class="parcel-price">
+      <h3>VOTRE ENVOI</h3>
+      <div>
+        <div class="parcel-price-img">
+          <img src="./Assets/ico_basket.png" alt="">
+        </div>
+        <table>
+          <tr>
+              <td>Destination :</td>
+              <td>France</td>
+          </tr>
+          <tr>
+              <td>Poids :</td>
+              <td>... kg</td>
+          </tr>
+          <tr>
+              <td>Indemnisation :</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Prix de l'envoi :</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Montant total :</td>
+              <td>...</td>
+          </tr>
+      </table>
+      </div>
+     </div>
+    </div>
    <!--services  -->
-   <div class="services-container">
+   <div class="section services-container">
     <h3>Envoyer un colis pas cher avec Mondial Relay</h3>
     <p>Mondial Relay livre aux meilleurs prix tous vos colis dans plusieurs pays d’Europe. Notre solution de livraison hors-domicile vous permet d’économiser plus de 40 % sur vos envois, et avec un délai moyen de livraison de 3 jours ouvrés en France Métropolitaine.
     </p>
