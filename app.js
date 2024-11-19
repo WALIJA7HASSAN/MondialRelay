@@ -150,5 +150,44 @@ document.querySelectorAll('.recipient-details-info .form-group input').forEach((
 });
 
 
+const weightInput = document.querySelector('.weight-selector input'); // Select the input
+const weightLegend = document.querySelector('.weight-selector legend'); // Select the legend
+
+if (weightInput && weightLegend) {
+  weightInput.addEventListener('focus', () => {
+    weightLegend.style.display = 'block'; // Show legend on focus
+  });
+
+  weightInput.addEventListener('blur', () => {
+    weightLegend.style.display = 'none'; // Hide legend on blur
+  });
+}
+
+// dim modal
+// Select elements
+const modalToggler = document.querySelector('.dimension-modal-toggler');
+const dimensionModal = document.querySelector('.dimension-modal');
+const modalCloseButtons = document.querySelectorAll('.dim-modal-close, .modal-close'); // Both close buttons
+const modalBackground = document.querySelector('.dimension-modal');
+
+// Show modal on click
+modalToggler.addEventListener('click', () => {
+  dimensionModal.style.display = 'flex'; // Show the modal
+});
+
+// Close modal on close button click
+modalCloseButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    dimensionModal.style.display = 'none'; // Hide the modal
+  });
+});
+
+// Close modal if clicking outside the modal content
+modalBackground.addEventListener('click', (event) => {
+  const modalContent = dimensionModal.querySelector('.modal');
+  if (!modalContent.contains(event.target)) {
+    dimensionModal.style.display = 'none'; // Hide the modal
+  }
+});
 
 

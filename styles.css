@@ -458,10 +458,35 @@ white-space: nowrap;
 .parcel-price table td{
   padding-bottom: 10px;
 }
+.parcel-price table tr{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 .parcel-price table tr td:last-child{
   text-align: right;
   font-weight: 700;
 }
+.parcel-des-selector{
+  padding: 15px;
+}
+.parcel-des-selector form{
+  display: grid;
+  gap:1.2rem;
+  margin-block: .75rem;
+}
+
+.dimension-modal-toggler{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.dimension-modal-toggler span{
+  text-decoration: underline;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 /* delivery */
 .delivery-options-container{
   padding: 30px 15px;
@@ -537,8 +562,12 @@ white-space: nowrap;
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
 }
-
-.recipient-details-info input,#recipient-lang{
+.weight-selector{
+  display: flex;
+  align-items: center;
+  padding-inline:15px;
+}
+.recipient-details-info input,#recipient-lang,.destinationCountrySelector select,.weight-selector input{
   width: 100%;
   border: none;
   padding: 17px 15px;
@@ -547,12 +576,16 @@ white-space: nowrap;
   
 
 }
-.recipient-details-info .form-group{
+.destinationCountrySelector select{
+  padding: 10px 15px;
+}
+.recipient-details-info .form-group,.destinationCountrySelector,.weight-selector{
   border-radius: 10px;
   border: 1px solid #818181;
   position: relative;
+ 
 }
-.recipient-details-info .form-group legend,.recipient-lang-form-group legend {
+.recipient-details-info .form-group legend,.recipient-lang-form-group legend,.destinationCountrySelector legend,.weight-selector legend {
 display: none;
 font-style: italic;
 color: #555454;
@@ -561,22 +594,25 @@ color: #555454;
   
 
 }
-.recipient-lang-form-group legend{
+.recipient-lang-form-group legend,.destinationCountrySelector legend{
   display: block !important;
 }
 
 
-.recipient-details-info input:focus ,#recipient-lang:focus{
+.recipient-details-info input:focus ,#recipient-lang:focus,.destinationCountrySelector select:focus,.weight-selector input:focus{
   outline: none;
 }
-.recipient-details-info input:focus::placeholder {
+.destinationCountrySelector select{
+  font-size: 16px;
+}
+.recipient-details-info input:focus::placeholder ,.weight-selector input:focus::placeholder {
   display: none;
   color: transparent;
 }
-.recipient-details-info input:focus legend {
+.recipient-details-info input:focus legend ,.weight-selector input:focus legend{
   display: block;
 }
-.recipient-details-info input::placeholder {
+.recipient-details-info input::placeholder,.weight-selector input::placeholder {
 	color: #555454;
   font-size: 16px;
 }
@@ -849,9 +885,123 @@ gap: 2rem;
 .thegreenweb img{
 width: 155px;
 }
-
-
+.chat-icon{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  z-index: 300;
+}
+.price-display-sm{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  background: #F5F3F7;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  position: fixed;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.price-display-sm p{
+font-size: 18px;
+font-weight: 700;
+color: #96154A;
+}
+.price-display-sm p:last-child{
+  font-size: 32px;
+}
+.dimension-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: none;
+  
+}
+.dimension-modal .modal{
+  background: #FDEEF0;
+  width: 90%;
+  height: 90%;
+  overflow-y: scroll;
+  padding: 15px;
+  max-width: 480px;
+  display: grid;
+  gap: 1rem;
+}
+.dimension-modal .modal >p{
+  font-size: 14px;
+}
+.dimension-modal .modal a{
+  color: #96154A;
+  transition: all .5s ease;
+  text-decoration: underline;
+}
+.dimension-modal .modal a:hover{
+  color: #FF5C84;
+}
+.dimension-modal button{
+  transition: all .5s ease;
+  color: white;
+  border: 2px solid #96154A;
+  background: #96154A;
+  padding: 5px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+.dimension-modal button:hover{
+  background: transparent;
+  color: #96154A;
+}
+.dim-modal-close{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.dimension-modal h3{
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+.dim-measurement p{
+  font-size: 11px;
+}
+.dim-measurement >div >p{
+  font-size: 15px;
+}
+.dim-measurement span{
+  color: #96154A;
+}
+.dim-measurement >div{
+  display: grid;
+  gap: 2rem;
+  text-align: center;
+}
+.dim-measurement >div > div{
+  display: grid;
+  gap: .5rem;
+  
+}
+.dim-measurement img{
+  display: block;
+  margin: 0 auto;
+}
+.dim-measurement{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
 @media screen and (min-width:768px) {
+  .section{
+    padding-inline: 30px;
+  }
   nav{
     display: flex;
     align-items: center;
@@ -1020,16 +1170,25 @@ width: 155px;
     display: flex;
   }
   .parcel-details-container{
-    grid-template-columns: 67% 1fr;
+    grid-template-columns: 1fr 34%;
     gap: 1.5rem;
   }
   .parcel-price{
     display: block;
     
   }
+  .price-display-sm{
+    display: none;
+  }
+  .dimension-modal {
+    background: rgba(50, 50, 93, 0.6);
+  }
 }
 
 @media screen and (min-width:1024px) {
+  .section{
+    padding-inline: 15px;
+  }
   .footer-top{
     background: url('./Assets/footer_img.png') no-repeat top center/contain;
   }

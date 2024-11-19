@@ -135,6 +135,36 @@
     <div class="section parcel-details-container">
  
      <div class="parcel-form">
+      <div class="parcel-des-selector">
+        <h3 class="parcel-h3"><img src="./Assets/parcel-icon.svg" width="24px" alt="">Mon colis</h3>
+        <form >
+          <fieldset class="form-group destinationCountrySelector">
+            <select required id="destinationCountry">
+                <option value="de">Allemagne</option>
+                <option value="at">Autriche</option>
+                <option value="be">Belgique</option>
+                <option value="es">Espagne</option>
+                <option value="fr" selected>France</option>
+                <option value="it">Italie</option>
+                <option value="lu">Luxembourg</option>
+                <option value="nl">Pays-Bas</option>
+                <option value="pl">Pologne</option>
+                <option value="pt">Portugal</option>   
+        
+            </select>
+            <legend for="destinationCountry">Pays de destination*</legend>
+        </fieldset>
+        <fieldset class="form-group weight-selector">
+          <legend for="weight">Poids*</legend>
+          <input type="text" id="weight" placeholder="Poids*">
+          <span>Kg</span>
+      </fieldset>
+       
+        
+        
+        </form>
+        <p class="dimension-modal-toggler"><i class="ri-information-line"></i><span>Poids & Dimensions</span></p>
+       </div>
        <!-- delivery options -->
        <div class="delivery-options-container">
         <h3 class="parcel-h3"><img src="./Assets/character.svg" width="22px" alt="">Mon destinataire</h3>
@@ -292,6 +322,40 @@
       </table>
       </div>
      </div>
+    </div>
+    <div class="dimension-modal">
+      <div class="modal">
+        <div class="dim-modal-close"><i class="ri-close-large-fill"></i></div>
+        <h3>Dimensions max de mon colis</h3>
+        <p>Veillez à bien renseigner un poids conforme à votre envoi (emballage inclus) ; en cas d’écart avec le poids réel, des coûts additionnels pourraient vous être facturés. Pour vous aider, consultez <a href="#">notre rubrique d’aide.</a></p>
+        <div class="dim-measurement">
+          <div>
+            <div><img src="./Assets/modal_locker.svg" alt=""></div>
+            <div><p><strong>Poids max en Locker</strong></p><p>25 KG</p></div>
+            <div><p><strong>Taille max en Locker</strong></p>
+            <p>Largeur = 38 cm max.</p>
+            <p>Hauteur = 39 cm max.</p>
+            <p>Longueur =<span>64 cm max.</span></p>
+           
+            </div>
+            <p>Envois vers la Pologne et l'Italie</p>
+            <p>H = 41 cm l = 38 cm  L = 64 cm.</p>
+          </div>
+          <div>
+            <div><img src="./Assets/modal_relais.svg" alt=""></div>
+            <div><p><strong>Poids max en Point Relais®</strong></p><p>30 KG. Envois vers la Pologne et l'Italie </p></div>
+            <div><p><strong>Taille max en Point Relais®</strong></p>
+            
+            <p>Longueur =<span>120 cm max.</span></p>
+            <p>L + l + H =<span>150 cm max.</span></p>
+           
+            </div>
+            <p>Envois vers la Pologne et l'Italie</p>
+            <p>H = 41 cm l = 38 cm  L = 64 cm.</p>
+          </div>
+        </div>
+        <button class="modal-close">Fermer</button>
+      </div>
     </div>
    <!--services  -->
    <div class="section services-container">
@@ -455,7 +519,13 @@
         </div>
       </div>
     </footer>
-  
+  <div class="chat-icon">
+    <img src="./Assets/chat-icon.svg" alt="">
+  </div>
+  <div class="price-display-sm">
+    <p>Montant    </p>
+    <p>--</p>
+  </div>
   
   <!-- script -->
   <script src="./app.js"></script>
