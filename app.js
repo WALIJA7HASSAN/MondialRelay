@@ -190,4 +190,92 @@ modalBackground.addEventListener('click', (event) => {
   }
 });
 
+// handling totals
+// Select form elements
+const destinationCountrySelect = document.querySelector('#destinationCountry');
+const weightInputVal = document.querySelector('#weight');
+
+// Select target table cells in .parcel-price
+const destinationCell = document.querySelector('.parcel-price table tr:nth-child(1) td:nth-child(2)');
+const weightCell = document.querySelector('.parcel-price table tr:nth-child(2) td:nth-child(2)');
+
+// Update Destination on change
+destinationCountrySelect.addEventListener('change', () => {
+  const selectedOption = destinationCountrySelect.options[destinationCountrySelect.selectedIndex];
+  destinationCell.textContent = selectedOption.textContent; 
+});
+
+// Update Weight on input
+weightInputVal.addEventListener('input', () => {
+  const weightValue = weightInput.value.trim();
+  weightCell.textContent = weightValue ? `${weightValue} kg` : '... kg'; 
+});
+
+// compensator
+// Select elements
+const decrementButton = document.querySelector('.compensation-couter span:nth-child(1)');
+const incrementButton = document.querySelector('.compensation-couter span:nth-child(3)');
+const valueDisplay = document.querySelector('.compensation-couter div p:nth-child(1)');
+const costDisplay = document.querySelector('.compensation-couter div p:nth-child(2)');
+const indemnisationRow = document.querySelector('.parcel-price table tr:nth-child(3) td:nth-child(2)');
+
+// Variables
+let currentValue = 25; // Starting value
+const maxValue = 500; // Max limit
+const increments = [
+  { value: 25, cost: 'Inclus' },
+  { value: 50, cost: 'Coût : 2 €' },
+  { value: 125, cost: 'Coût : 3,5 €' },
+  { value: 250, cost: 'Coût : 5 €' },
+  { value: 375, cost: 'Coût : 6,5 €' },
+  { value: 500, cost: 'Coût : 8 €' },
+];
+
+// Helper function to update the display
+function updateDisplay() {
+  // Update the value and cost
+  const currentStep = increments.find((step) => step.value === currentValue);
+  valueDisplay.textContent = `${currentValue} €`;
+  costDisplay.textContent = currentStep ? currentStep.cost : '';
+
+  indemnisationRow.textContent = currentValue > 25 
+  ? `${currentStep.cost.replace('Coût : ', '')}` 
+  : '';
+  // Update button states
+  if (currentValue === 25) {
+    decrementButton.style.backgroundColor = '#808080'; // Not active
+    incrementButton.style.backgroundColor = '#96154A'; // Active
+  } else if (currentValue === maxValue) {
+    decrementButton.style.backgroundColor = '#96154A'; // Active
+    incrementButton.style.backgroundColor = '#808080'; // Not active
+  } else {
+    decrementButton.style.backgroundColor = '#96154A'; // Active
+    incrementButton.style.backgroundColor = '#96154A'; // Active
+  }
+}
+
+// Event listeners
+decrementButton.addEventListener('click', () => {
+  if (currentValue > 25) {
+    const currentIndex = increments.findIndex((step) => step.value === currentValue);
+    if (currentIndex > 0) {
+      currentValue = increments[currentIndex - 1].value;
+      updateDisplay();
+    }
+  }
+});
+
+incrementButton.addEventListener('click', () => {
+  if (currentValue < maxValue) {
+    const currentIndex = increments.findIndex((step) => step.value === currentValue);
+    if (currentIndex < increments.length - 1) {
+      currentValue = increments[currentIndex + 1].value;
+      updateDisplay();
+    }
+  }
+});
+
+// Initialize display
+updateDisplay();
+
 

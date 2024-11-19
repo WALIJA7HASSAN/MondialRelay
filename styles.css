@@ -463,6 +463,15 @@ white-space: nowrap;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.parcel-price tr:nth-child(3) td:last-child{
+  color: #96154A;
+}
+.parcel-price tr:nth-child(4) td:last-child{
+  color: #96154A;
+}
+.parcel-price tr:nth-child(5) td:last-child{
+  color: #96154A;
+}
 .parcel-price table tr td:last-child{
   text-align: right;
   font-weight: 700;
@@ -1235,7 +1244,7 @@ color: #96154A;
 
 @media screen and (min-width:1024px) {
   .section{
-    padding-inline: 15px;
+    padding-inline: 0px;
   }
   .footer-top{
     background: url('./Assets/footer_img.png') no-repeat top center/contain;
