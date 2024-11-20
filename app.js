@@ -246,6 +246,47 @@ weightInputVal.addEventListener('input', () => {
   }
 });
 
+//display reelevant delivery methods
+const countryDeliveryMapping = {
+  de: ['domicile'],          // Allemagne - Domicile only
+  at: ['domicile'],          // Autriche - Domicile only
+  be: ['locker', 'domicile'], // Belgique - Both
+  es: ['locker'],            // Espagne - Locker only
+  fr: ['locker'],            // France - Locker only
+  it: ['locker', 'domicile'], // Italie - Both
+  lu: ['locker', 'domicile'], // Luxembourg - Both
+  nl: ['locker', 'domicile'], // Pays-Bas - Both
+  pl: ['locker'],            // Pologne - Locker only
+  pt: ['locker'],            // Portugal - Locker only
+};
+
+// Elements
+const destinationSelector = document.getElementById('destinationCountry');
+const deliveryMethods = document.querySelectorAll('.delivery-methods .delivery-method');
+
+// Update delivery methods based on selected country
+function updateDeliveryMethods() {
+  const selectedCountry = destinationSelector.value;
+  const allowedMethods = countryDeliveryMapping[selectedCountry] || [];
+
+  deliveryMethods.forEach(method => {
+    const methodType = method.textContent.trim().toLowerCase().includes('locker') ? 'locker' : 'domicile';
+    method.style.display = allowedMethods.includes(methodType) ? 'grid' : 'none';
+  });
+
+  // Ensure active class is only on visible method
+  const firstVisibleMethod = Array.from(deliveryMethods).find(method => method.style.display === 'grid');
+  deliveryMethods.forEach(method => method.classList.remove('delivery-method-active'));
+  if (firstVisibleMethod) {
+    firstVisibleMethod.classList.add('delivery-method-active');
+  }
+}
+
+// Event listener for country selection
+destinationSelector.addEventListener('change', updateDeliveryMethods);
+
+// Initialize methods on page load
+updateDeliveryMethods();
 
 
 
@@ -381,3 +422,48 @@ document.querySelectorAll('.delivery-methods .delivery-method').forEach(method =
     }
   });
 });
+
+// displaying btns con selection
+// Get elements
+const deliveryOptionsForm = document.querySelector('.delivery-options');
+const validationButton = document.querySelector('.validation-btn');
+const deliveryPointSection = document.querySelector('.delivery-point.section');
+const deliveryPointH3 = deliveryPointSection.querySelector('h3');
+const deliveryPointInnerDiv = deliveryPointSection.querySelector('div');
+const accountCreationButton = document.querySelector('.account-creation-btn');
+
+// Function to handle radio selection
+function handleDeliveryOptionChange() {
+  const selectedOption = deliveryOptionsForm.querySelector('input[name="delivery-option"]:checked');
+
+  if (selectedOption) {
+    if (selectedOption.id === 'recipient-details') {
+      // Display validation button
+      validationButton.style.display = 'block';
+
+      // Show delivery-point section
+      deliveryPointH3.style.display = 'block';
+      deliveryPointInnerDiv.style.display = 'grid';
+
+      // Hide account creation button
+      accountCreationButton.style.display = 'none';
+    } else if (selectedOption.id === 'recipient-choice') {
+      // Hide validation button
+      validationButton.style.display = 'none';
+
+      // Hide delivery-point inner elements
+      deliveryPointH3.style.display = 'none';
+      deliveryPointInnerDiv.style.display = 'none';
+
+      // Display account creation button
+      accountCreationButton.style.display = 'block';
+    }
+  }
+}
+
+// Event listener for delivery option changes
+deliveryOptionsForm.addEventListener('change', handleDeliveryOptionChange);
+
+// Initialize visibility on page load
+handleDeliveryOptionChange();
+

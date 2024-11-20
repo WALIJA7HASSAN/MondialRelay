@@ -914,6 +914,7 @@ padding-left: 10px
   margin-bottom: .5rem;
   display: block;
   text-align: center;
+  display: none;
 }
 .account-creation-btn{
   background: transparent;
