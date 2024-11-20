@@ -44,6 +44,15 @@ input[type="number"] {
   background: white;
 
 }
+/* Default styles for nav-header */
+.nav-header {
+  position: relative; /* Default position */
+  transition: position 0.3s ease, top 0.3s ease;
+}
+
+
+
+
 .nav-header > div{
   display: flex;
   align-items: center;
@@ -924,9 +933,9 @@ padding-left: 10px
   transition: all .5s ease;
   width: 100%;
   margin-bottom: .5rem;
-  display: block;
+  /* display: block; */
   text-align: center;
-  display: none;
+  /* display: none; */
 }
 .account-creation-btn{
   background: transparent;

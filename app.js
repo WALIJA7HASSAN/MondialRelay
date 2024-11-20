@@ -24,10 +24,6 @@ connexionFormClose?.addEventListener('click', () => {
   connexionForm.classList.remove('connexion-form-active'); 
 });
 
-// connexionTogglerLg?.addEventListener('click', () => {
-//   connexionForm.classList.toggle('connexion-form-active'); 
-//   connexionTogglerLg.classList.toggle('.nav-footer-active')
-// });
 
 // Get the nav-footer and all its child divs
 const navFooter = document.querySelector('.nav-footer');
@@ -98,45 +94,6 @@ if (window.innerWidth < 768) {
   removeActiveClasses();
 }
 
-// delivery options
-// document.querySelectorAll('.delivery-options fieldset').forEach((fieldset) => {
-//   fieldset.addEventListener('click', (event) => {
-//     // Check if the fieldset is not disabled
-//     if (!fieldset.hasAttribute('disabled')) {
-//       const radio = fieldset.querySelector('input[type="radio"]');
-//       if (radio) {
-//         radio.checked = true;
-//       }
-//     }
-//   });
-// });
-
-document.querySelectorAll('.delivery-options fieldset').forEach((fieldset) => {
-  fieldset.addEventListener('click', (event) => {
-    // Check if the fieldset is not disabled
-    if (!fieldset.hasAttribute('disabled')) {
-      const radio = fieldset.querySelector('input[type="radio"]');
-      if (radio) {
-        radio.checked = true;
-
-        // Toggle active info section based on the selected radio button
-        const recipientDetailsInfo = document.querySelector('.recipient-details-info');
-        const recipientChoiceInfo = document.querySelector('.recipient-choice-info');
-
-        // Hide both sections initially
-        recipientDetailsInfo.classList.remove('delivery-info-active');
-        recipientChoiceInfo.classList.remove('delivery-info-active');
-
-        // Show the relevant section based on the selected radio button
-        if (radio.id === 'recipient-details') {
-          recipientDetailsInfo.classList.add('delivery-info-active');
-        } else if (radio.id === 'recipient-choice') {
-          recipientChoiceInfo.classList.add('delivery-info-active');
-        }
-      }
-    }
-  });
-});
 
 
 // toggling legend visibility
@@ -454,48 +411,62 @@ document.querySelectorAll('.delivery-methods .delivery-method').forEach(method =
 });
 
 // displaying btns con selection
-// Get elements
 const deliveryOptionsForm = document.querySelector('.delivery-options');
 const validationButton = document.querySelector('.validation-btn');
 const deliveryPointSection = document.querySelector('.delivery-point.section');
 const deliveryPointH3 = deliveryPointSection.querySelector('h3');
 const deliveryPointInnerDiv = deliveryPointSection.querySelector('div');
 const accountCreationButton = document.querySelector('.account-creation-btn');
+const recipientDetailsInfo = document.querySelector('.recipient-details-info');
+const recipientChoiceInfo = document.querySelector('.recipient-choice-info');
 
-// Function to handle radio selection
+// Function to handle radio selection and toggle section visibility
 function handleDeliveryOptionChange() {
   const selectedOption = deliveryOptionsForm.querySelector('input[name="delivery-option"]:checked');
 
   if (selectedOption) {
+    // Toggle the relevant sections based on the selected radio button
+    recipientDetailsInfo.classList.remove('delivery-info-active');
+    recipientChoiceInfo.classList.remove('delivery-info-active');
+
     if (selectedOption.id === 'recipient-details') {
-      // Display validation button
-      validationButton.style.display = 'block';
-
-      // Show delivery-point section
-      deliveryPointH3.style.display = 'block';
-      deliveryPointInnerDiv.style.display = 'grid';
-
-      // Hide account creation button
-      accountCreationButton.style.display = 'none';
+      recipientDetailsInfo.classList.add('delivery-info-active'); // Show recipient-details info section
+      validationButton.style.display = 'block'; // Show validation button
+      deliveryPointH3.style.display = 'block'; // Show delivery-point header
+      deliveryPointInnerDiv.style.display = 'grid'; // Show delivery-point inner elements
+      accountCreationButton.style.display = 'none'; // Hide account creation button
     } else if (selectedOption.id === 'recipient-choice') {
-      // Hide validation button
-      validationButton.style.display = 'none';
-
-      // Hide delivery-point inner elements
-      deliveryPointH3.style.display = 'none';
-      deliveryPointInnerDiv.style.display = 'none';
-
-      // Display account creation button
-      accountCreationButton.style.display = 'block';
+      recipientChoiceInfo.classList.add('delivery-info-active'); // Show recipient-choice info section
+      validationButton.style.display = 'none'; // Hide validation button
+      deliveryPointH3.style.display = 'none'; // Hide delivery-point header
+      deliveryPointInnerDiv.style.display = 'none'; // Hide delivery-point inner elements
+      accountCreationButton.style.display = 'block'; // Show account creation button
     }
   }
 }
 
-// Event listener for delivery option changes
+// Event listener for delivery option changes (both radio selection and fieldset click)
 deliveryOptionsForm.addEventListener('change', handleDeliveryOptionChange);
+
+// Event listener for fieldset clicks to handle radio selection
+document.querySelectorAll('.delivery-options fieldset').forEach((fieldset) => {
+  fieldset.addEventListener('click', (event) => {
+    // Check if the fieldset is not disabled
+    if (!fieldset.hasAttribute('disabled')) {
+      const radio = fieldset.querySelector('input[type="radio"]');
+      if (radio) {
+        radio.checked = true; // Mark the radio button as checked
+
+        // Trigger the handleDeliveryOptionChange function to update visibility
+        handleDeliveryOptionChange();
+      }
+    }
+  });
+});
 
 // Initialize visibility on page load
 handleDeliveryOptionChange();
+
 
 // shipping price calculation
 // Shipping prices for each country and delivery method
