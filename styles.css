@@ -218,6 +218,7 @@ transition: all .5s ease;
   inset: 0;
   transition: all 0.5s ease;
   display: none;
+  z-index: 1000;
 }
 .connexion-form h2{
   font-size: 13px;
@@ -438,7 +439,7 @@ white-space: nowrap;
 }
 /* parcel form */
 .parcel-details-container{
-  padding-right: 1rem;
+  /* padding-right: 1rem; */
   display: grid;
   width: 100%;
 }
@@ -533,6 +534,9 @@ white-space: nowrap;
   display: flex;
   gap: 1rem;
   margin: 20px 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 .delivery-method{
   background: #F5F3F7;
@@ -563,6 +567,9 @@ white-space: nowrap;
 .compensation-selector{
   padding: 15px;
 }
+.compensation-selector h3{
+  padding-bottom: 1rem;
+}
 .compensation-selector p{
   font-size: 14px;
 }
@@ -591,7 +598,7 @@ white-space: nowrap;
   text-align: center;
   color: #96154A;
   font-weight: 700;
-  flex-grow: 1;
+  min-width: 200px;
 
 }
 .compensation-couter div p:first-child{
@@ -894,7 +901,7 @@ padding-left: 10px
 .valid-result-p{
   font-size: 16px;
 }
-.validation-btn{
+.validation-btn,.account-creation-btn{
   color: white;
   background: #96154A;
   padding: 20px 10px;
@@ -904,8 +911,15 @@ padding-left: 10px
   font-weight: 700;
   transition: all .5s ease;
   width: 100%;
+  margin-bottom: .5rem;
+  display: block;
+  text-align: center;
 }
-.validation-btn:hover{
+.account-creation-btn{
+  background: transparent;
+  color: #404041;
+}
+.validation-btn:hover,.account-creation-btn:hover{
   background: transparent;
   color: #96154A;
 }
@@ -1380,6 +1394,7 @@ color: #96154A;
     display: flex;
   }
   .parcel-details-container{
+    padding-right: 1rem;
     grid-template-columns: 1fr 34%;
     gap: 1.5rem;
   }
@@ -1420,6 +1435,13 @@ color: #96154A;
   }
   .v-fieldset-lg{
     display: block;
+  }
+  .delivery-methods > div{
+    justify-content: start;
+  }
+  .compensation-couter div{
+    flex-grow: 1;
+  
   }
 }
 

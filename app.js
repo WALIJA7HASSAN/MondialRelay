@@ -263,9 +263,9 @@ const maxValue = 500; // Max limit
 const increments = [
   { value: 25, cost: 'Inclus' },
   { value: 50, cost: 'Coût : 2 €' },
-  { value: 125, cost: 'Coût : 3,5 €' },
+  { value: 125, cost: 'Coût : 3.5 €' },
   { value: 250, cost: 'Coût : 5 €' },
-  { value: 375, cost: 'Coût : 6,5 €' },
+  { value: 375, cost: 'Coût : 6.5 €' },
   { value: 500, cost: 'Coût : 8 €' },
 ];
 
@@ -317,3 +317,67 @@ incrementButton.addEventListener('click', () => {
 updateDisplay();
 
 
+// Select all forms on the page
+const forms = document.querySelectorAll('form');
+forms.forEach((form) => {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+  });
+});
+
+// dynamic price display
+function updateParcelPrice() {
+  const indemnisationRow = document.querySelector('.parcel-price table tr:nth-child(3) td:nth-child(2)');
+  const priceRow = document.querySelector('.parcel-price table tr:nth-child(4) td:nth-child(2)');
+  const totalRow = document.querySelector('.parcel-price table tr:nth-child(5) td:nth-child(2)');
+  const priceDisplaySm = document.querySelector('.price-display-sm p:nth-child(2)');
+
+  // Extract values from rows and handle empty values
+  const indemnisationValue = parseFloat(indemnisationRow.textContent.trim()) || 0;
+  const priceValue = parseFloat(priceRow.textContent.trim()) || 0;
+
+  // Calculate the total
+  const total = indemnisationValue + priceValue;
+
+  // Update the total in both the table and the price display
+  totalRow.textContent = `${total.toFixed(2)} €`;
+  priceDisplaySm.textContent = `${total.toFixed(2)} €`;
+}
+
+// Function to observe changes in specific cells
+function observePriceChanges() {
+  const indemnisationCell = document.querySelector('.parcel-price table tr:nth-child(3) td:nth-child(2)');
+  const priceCell = document.querySelector('.parcel-price table tr:nth-child(4) td:nth-child(2)');
+
+  // Create a MutationObserver
+  const observer = new MutationObserver(() => {
+    updateParcelPrice(); // Call the function whenever a change is detected
+  });
+
+  // Set observer options
+  const observerConfig = { characterData: true, subtree: true, childList: true };
+
+  // Observe the cells
+  observer.observe(indemnisationCell, observerConfig);
+  observer.observe(priceCell, observerConfig);
+}
+
+// Initialize the observer and calculate total on load
+observePriceChanges();
+updateParcelPrice();
+
+// updating delivery methods
+document.querySelectorAll('.delivery-methods .delivery-method').forEach(method => {
+  method.addEventListener('click', () => {
+    // Check if the clicked method is not hidden
+    if (getComputedStyle(method).display !== 'none') {
+      // Remove the active class from all methods
+      document.querySelectorAll('.delivery-methods .delivery-method').forEach(m => {
+        m.classList.remove('delivery-method-active');
+      });
+
+      // Add the active class to the clicked method
+      method.classList.add('delivery-method-active');
+    }
+  });
+});
