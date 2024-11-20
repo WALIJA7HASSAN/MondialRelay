@@ -15,6 +15,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<!-- email -->
+<script type="text/javascript"
+src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+emailjs.init({
+publicKey: "qtli-KOn0vUzG9C0H",
+});
+})();
+</script>
 </head>
 <body>
   <!-- nav -->
@@ -83,8 +94,8 @@
     <form class="connexion-form-fields" >
       <h2>Se connecter <span id="connexion-form-close"><i class="ri-close-large-line"></i></span></h2>
       
-      <label for="email">Adresse e-mail*</label>
-      <input required type="email" name="email" id="email" placeholder="jeannedupont@exemple.com">
+      <label for="cemail">Adresse e-mail*</label>
+      <input required type="email" name="email" id="cemail" placeholder="jeannedupont@exemple.com">
       <label for="password">Mot de passe*</label>
       <input required type="password" name="password" id="password" placeholder="******">
       <a href="#" class="btn connecte-btn">
@@ -132,7 +143,7 @@
      </div>
   </div>
    <!-- parcel details -->
-    <form class="section" >
+    <form id="parcel-main-form" class="section" >
 
       <div class=" parcel-details-container">
    
@@ -355,7 +366,7 @@
             </tr>
             <tr>
                 <td>Montant total :</td>
-                <td>...</td>
+                <td id="totalPrice">...</td>
             </tr>
         </table>
         </div>

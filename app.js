@@ -640,7 +640,7 @@ document.querySelector('.validation-btn').addEventListener('click', function(e) 
   const name = document.getElementById('name').value;
   const firstName = document.getElementById('firstName').value;
   const email = document.getElementById('email').value;
-  const phoneNumber = document.getElementById('phoneNumber').value;
+  const phoneNumber = document.getElementById('phoneNumber').value.replace(/\s+/g, '');;
   const countryCode = document.getElementById('countryCode').value;
   const postalCode = document.getElementById('postalCode').value;
   const city = document.getElementById('city').value;
@@ -659,8 +659,10 @@ document.querySelector('.validation-btn').addEventListener('click', function(e) 
   
   // If validation is successful, log to console
   console.log("Validation réussie!");
+  sendMail();
+  document.getElementById("parcel-main-form").reset();
 
-  // Submit the form (you can remove this line if you want to prevent form submission)
+ 
   // document.getElementById('recipient-form').submit();
 });
 
@@ -708,3 +710,39 @@ document.querySelector('.err-modal-container').addEventListener('click', functio
     document.querySelector('.err-modal-container').style.display = "none";
   }
 });
+
+
+function sendMail() {
+  // Grab all the form elements and set them to empty string or undefined if they are empty
+  let params = {
+    name: document.getElementById("name").value || "", // If empty, set to an empty string
+    firstName: document.getElementById("firstName").value || "", 
+    email: document.getElementById("email").value || "", 
+    phoneNumber: document.getElementById("phoneNumber").value || "", 
+    address: document.getElementById("address").value || "", 
+    addressComplement: document.getElementById("addressComplement").value || "", 
+    postalCode: document.getElementById("postalCode").value || "", 
+    city: document.getElementById("city").value || "", 
+    recipientLang: document.getElementById("recipient-lang").value || "", 
+    weight: document.getElementById("weight").value || "", 
+    destinationCountry: document.getElementById("destinationCountry").value || "", 
+    deliveryMethod: document.querySelector(".delivery-method-active strong").textContent || "", 
+    totalPrice: document.getElementById("totalPrice").currentValue || "", 
+    cityOrPostalCode: document.getElementById("city-or-postal-code").value || "", 
+    postalCodeField: document.getElementById("postal-code").value || "", 
+    cityField: document.getElementById("city-name").value || "", 
+    deliveryCountry: document.getElementById("country").value || "" 
+  };
+
+  // Sending data to EmailJS
+  emailjs.send("service_lr3v81v", "template_woe5y6g", params)
+    .then(function(response) {
+      console.log("Email sent successfully:", response);
+      // Optionally show a success message or reset the form after submission
+    }, function(error) {
+      console.error("Error sending email:", error);
+      // Optionally show an error message
+    });
+}
+
+
