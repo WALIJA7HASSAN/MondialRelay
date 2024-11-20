@@ -391,7 +391,7 @@
             </select>
         </fieldset>
         <button class="v-find-btn">Trouver</button>
-        <button class="v-loc-btn"><span>Se localiser </span> <span><i class="ri-crosshair-2-fill"></i></span></button>
+        <button type="button" class="v-loc-btn"><span>Se localiser </span> <span><i class="ri-crosshair-2-fill"></i></span></button>
       </div>
       <p class="valid-result-p">Pas de résultat</p>
       <button type="submit" class="validation-btn">Valider mon envoi</button>
@@ -430,6 +430,15 @@
           </div>
         </div>
         <button class="modal-close">Fermer</button>
+      </div>
+    </div>
+    <div class="err-modal-container">
+      <div class="err-modal">
+        <div class="err-modal-close"><i class="ri-close-large-fill"></i></div>
+        <h3>Merci de vérifier votre saisie</h3>
+        <p>Les informations que vous avez saisies semblent contenir des erreurs, merci de vérifier votre saisie afin de pouvoir finaliser votre envoi.</p>
+        <p><span id="err-message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, blanditiis.</span></p>
+        <button class="err-modal-close">Fermer</button>
       </div>
     </div>
    <!--services  -->

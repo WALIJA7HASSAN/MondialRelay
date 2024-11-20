@@ -568,7 +568,7 @@ function updateShipping() {
     for (const weightRange in priceList) {
       const weightThreshold = parseInt(weightRange);
       if (weight <= weightThreshold) {
-        shippingPrice = priceList[weightThreshold];
+        shippingPrice = priceList[weightThreshold].toFixed(2);
         break;
       }
     }
@@ -584,8 +584,127 @@ function updateShipping() {
     // Update total amount (assuming no other charges)
     const totalRow = document.querySelector("table tr:nth-child(5) td:last-child");
     totalRow.innerText = `${shippingPrice} €`;
+    
+   
   }
 }
 
-// displaying legend
+// loc
+// // Select elements for both screen sizes
+// const cityInputLarge = document.querySelector('#city-name');
+// const postalCodeInputLarge = document.querySelector('#postal-code');
+// const cityPostalCodeInputSmall = document.querySelector('#city-or-postal-code');
 
+// // Function to update fields based on location
+// function updateLocationFields(latitude, longitude) {
+//     // Check if the screen size is large or small
+//     const isLargeScreen = window.matchMedia('(min-width: 768px)').matches;
+
+//     if (isLargeScreen) {
+//         // Update large screen fields (separate city and postal code fields)
+//         postalCodeInputLarge.value = `${latitude}, ${longitude}`; // You can later use geocoding for proper postal code
+//         cityInputLarge.value = `Latitude: ${latitude}, Longitude: ${longitude}`; // Similarly, geocode for city
+//     } else {
+//         // Update small screen fields (combined city or postal code field)
+//         cityPostalCodeInputSmall.value = `${latitude}, ${longitude}`;
+//     }
+// }
+
+// // Function to get user's location and update fields
+// function getLocation() {
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(function (position) {
+//             const latitude = position.coords.latitude;
+//             const longitude = position.coords.longitude;
+//             updateLocationFields(latitude, longitude);
+//         }, function (error) {
+//             alert('Unable to retrieve your location. Please enable location access.');
+//         });
+//     } else {
+//         alert('Geolocation is not supported by this browser.');
+//     }
+// }
+
+// // Add event listeners for button and span clicks
+// const locButton = document.querySelector('.v-loc-btn');
+// const locSpan = document.querySelector('.city-or-postal-code-fieldset span');
+
+// locButton.addEventListener('click', getLocation);
+// locSpan.addEventListener('click', getLocation);
+
+// validation checks
+document.querySelector('.validation-btn').addEventListener('click', function(e) {
+  e.preventDefault();  // Prevent form submission to handle validation first
+  
+  // Grab form elements
+  const name = document.getElementById('name').value;
+  const firstName = document.getElementById('firstName').value;
+  const email = document.getElementById('email').value;
+  const phoneNumber = document.getElementById('phoneNumber').value;
+  const countryCode = document.getElementById('countryCode').value;
+  const postalCode = document.getElementById('postalCode').value;
+  const city = document.getElementById('city').value;
+  
+  // Check required fields
+  if (!name || !firstName || !email || !phoneNumber || !postalCode || !city) {
+    showErrorModal("Tous les champs requis doivent être remplis.");
+    return;
+  }
+  
+  const phonePattern = getPhonePattern(countryCode);
+  if (!phonePattern.test(phoneNumber)) {
+    showErrorModal(`Le numéro de téléphone "${phoneNumber}" est invalide pour l'indicatif "${countryCode}".`);
+    return;
+  }
+  
+  // If validation is successful, log to console
+  console.log("Validation réussie!");
+
+  // Submit the form (you can remove this line if you want to prevent form submission)
+  // document.getElementById('recipient-form').submit();
+});
+
+function getPhonePattern(countryCode) {
+  switch (countryCode) {
+    case "+33": // France
+      return /^[0-9]{9}$/; // Example: 9 digits
+    case "+32": // Belgium
+      return /^[0-9]{9}$/;
+    case "+34": // Spain
+      return /^[0-9]{9}$/;
+    case "+44": // UK
+      return /^[0-9]{10}$/;
+    case "+39": // Italy
+      return /^[0-9]{10}$/;
+    case "+49": // Germany
+      return /^[0-9]{10}$/;
+    case "+48": // Poland
+      return /^[0-9]{9}$/;
+    default:
+      return /^[0-9]{9,15}$/; // Generic format, you can extend more cases
+  }
+}
+
+// Function to show error message in the modal
+function showErrorModal(message) {
+  const errModalContainer = document.querySelector('.err-modal-container');
+  const errMessage = document.getElementById('err-message');
+  // Set the error message
+  errMessage.textContent = message;
+  
+  // Display the modal
+  errModalContainer.style.display = "flex";
+}
+
+// Close modal on click (either on the close button, icon or anywhere outside the modal)
+document.querySelectorAll('.err-modal-close').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelector('.err-modal-container').style.display = "none";
+  });
+});
+
+document.querySelector('.err-modal-container').addEventListener('click', function(e) {
+  if (e.target === this) {
+    document.querySelector('.err-modal-container').style.display = "none";
+  }
+});

@@ -743,10 +743,12 @@ color: #555454;
 }
 .destinationCountrySelector select{
   font-size: 16px;
+  font-family: "Montserrat", sans-serif;
 }
 .recipient-details-info input:focus::placeholder ,.weight-selector input:focus::placeholder {
   display: none;
   color: transparent;
+  
 }
 
 .recipient-details-info input:focus legend ,.weight-selector input:focus legend{
@@ -757,8 +759,12 @@ color: #555454;
     display: block; 
 }
 .recipient-details-info input::placeholder,.weight-selector input::placeholder {
-	color: #555454;
+	color: #818181;
   font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+}
+.requiredplaceholder::placeholder{
+  color: #96154A;
 }
 .receipient-phone{
   display: flex;
@@ -769,6 +775,7 @@ color: #555454;
   border-radius: 20px;
   width: 20%;
   padding: 5px;
+  font-family: "Montserrat", sans-serif;
 }
 .receipient-phone legend{
   display: block !important;
@@ -1161,7 +1168,7 @@ color: #96154A;
 .price-display-sm p:last-child{
   font-size: 32px;
 }
-.dimension-modal {
+.dimension-modal,.err-modal-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1171,7 +1178,7 @@ color: #96154A;
   display: none;
   
 }
-.dimension-modal .modal{
+.dimension-modal .modal,.err-modal{
   background: #FDEEF0;
   width: 90%;
   height: 90%;
@@ -1181,8 +1188,27 @@ color: #96154A;
   display: grid;
   gap: 1rem;
 }
-.dimension-modal .modal >p{
+
+.err-modal{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "Montserrat Alternates", sans-serif;
+
+}
+.err-modal p span{
+  color: #96154A;
+}
+.err-modal{
+  background: white;
+}
+
+.dimension-modal .modal >p,.err-modal p{
   font-size: 14px;
+}
+.err-modal p{
+  font-size: 15px;
 }
 .dimension-modal .modal a{
   color: #96154A;
@@ -1192,7 +1218,7 @@ color: #96154A;
 .dimension-modal .modal a:hover{
   color: #FF5C84;
 }
-.dimension-modal button{
+.dimension-modal button,.err-modal button{
   transition: all .5s ease;
   color: white;
   border: 2px solid #96154A;
@@ -1202,19 +1228,31 @@ color: #96154A;
   font-weight: 700;
   border-radius: 10px;
 }
-.dimension-modal button:hover{
+
+.err-modal button{
+  padding: 10px 20px;
+  align-self: self-start;
+}
+.dimension-modal button:hover,.err-modal button:hover{
   background: transparent;
   color: #96154A;
 }
-.dim-modal-close{
+.dim-modal-close,.err-modal-close{
   display: flex;
   align-items: center;
   justify-content: end;
 }
-.dimension-modal h3{
+.err-modal-close{
+  align-self: self-end;
+}
+.dimension-modal h3,.err-modal h3{
   font-size: 15px;
   text-align: center;
   font-weight: 500;
+}
+.err-modal h3{
+  font-size: 23px;
+  color: #96154A;
 }
 .dim-measurement p{
   font-size: 11px;
@@ -1427,8 +1465,12 @@ color: #96154A;
   .price-display-sm{
     display: none;
   }
-  .dimension-modal {
+  .dimension-modal,.err-modal-container {
     background: rgba(50, 50, 93, 0.6);
+  }
+  .err-modal{
+    max-width: 800px;
+    max-height: 291px;
   }
   .delivery-point  .city-or-postal-code-fieldset {
     display: none !important;
