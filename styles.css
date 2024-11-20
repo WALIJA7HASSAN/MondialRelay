@@ -236,7 +236,7 @@ transition: all .5s ease;
 .connexion-form-active{
   display: block;
 }
-.connexion-form form{
+.connexion-form .connexion-form-fields{
   display: grid;
   gap: 0.5rem;
   padding: 20px;
@@ -489,7 +489,7 @@ white-space: nowrap;
 .parcel-des-selector{
   padding: 15px;
 }
-.parcel-des-selector form{
+.parcel-des-selector-form{
   display: grid;
   gap:1.2rem;
   margin-block: .75rem;
@@ -680,12 +680,12 @@ white-space: nowrap;
   padding: 15px;
   display: none;
 }
-.recipient-details-info form{
+.recipient-details-info .recipient-details-info-form{
   display: grid;
   gap: 1rem;
   padding: 10px 0;
 }
-.recipient-details-info form div{
+.recipient-details-info .recipient-details-info-form div{
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
@@ -707,12 +707,14 @@ white-space: nowrap;
 .destinationCountrySelector select{
   padding: 10px 15px;
 }
+
 .recipient-details-info .form-group,.destinationCountrySelector,.weight-selector{
   border-radius: 10px;
   border: 1px solid #818181;
   position: relative;
  
 }
+
 .recipient-details-info .form-group legend,.recipient-lang-form-group legend,.destinationCountrySelector legend,.weight-selector legend {
 display: none;
 font-style: italic;
@@ -737,8 +739,13 @@ color: #555454;
   display: none;
   color: transparent;
 }
+
 .recipient-details-info input:focus legend ,.weight-selector input:focus legend{
   display: block;
+}
+.form-group input:focus + legend,
+.form-group input:not(:placeholder-shown) + legend {
+    display: block; 
 }
 .recipient-details-info input::placeholder,.weight-selector input::placeholder {
 	color: #555454;
@@ -885,7 +892,11 @@ padding-left: 10px
   font-size: 30px;
 }
 .v-loc-btn{
+  display: none;
+  align-items: center;
   padding: 8px !important;
+  justify-content: center;
+  gap: 1rem;
 }
 .v-find-btn{
   padding: 15px !important;
@@ -900,6 +911,7 @@ padding-left: 10px
 }
 .valid-result-p{
   font-size: 16px;
+  display: none;
 }
 .validation-btn,.account-creation-btn{
   color: white;
@@ -1432,7 +1444,7 @@ color: #96154A;
   }
   .v-loc-btn{
     grid-column: 11 / span 2;
-    display: block;
+    display: flex;
   }
   .v-fieldset-lg{
     display: block;

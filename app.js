@@ -139,29 +139,59 @@ document.querySelectorAll('.delivery-options fieldset').forEach((fieldset) => {
 });
 
 
+// toggling legend visibility
 document.querySelectorAll('.recipient-details-info .form-group input').forEach((input) => {
   const legend = input.nextElementSibling; // Select the sibling legend
+  
+  // Function to toggle legend visibility
+  const toggleLegend = () => {
+    if (legend) {
+      legend.style.display = input.value.trim() !== '' ? 'block' : 'none';
+    }
+  };
+
+  // Event listener for focus
   input.addEventListener('focus', () => {
     if (legend) legend.style.display = 'block';
   });
-  input.addEventListener('blur', () => {
-    if (legend) legend.style.display = 'none';
-  });
+
+  // Event listener for blur
+  input.addEventListener('blur', toggleLegend);
+
+  // Event listener for input (to handle dynamic changes in value)
+  input.addEventListener('input', toggleLegend);
+
+  // Initialize legend visibility on page load
+  toggleLegend();
 });
 
 
-const weightInput = document.querySelector('.weight-selector input'); // Select the input
-const weightLegend = document.querySelector('.weight-selector legend'); // Select the legend
+
+
+const weightInput = document.querySelector('.weight-selector input'); 
+const weightLegend = document.querySelector('.weight-selector legend'); 
 
 if (weightInput && weightLegend) {
+  
+  const toggleLegend = () => {
+    weightLegend.style.display = weightInput.value.trim() !== '' ? 'block' : 'none';
+  };
+
+ 
   weightInput.addEventListener('focus', () => {
-    weightLegend.style.display = 'block'; // Show legend on focus
+    weightLegend.style.display = 'block'; 
   });
 
-  weightInput.addEventListener('blur', () => {
-    weightLegend.style.display = 'none'; // Hide legend on blur
-  });
+
+  weightInput.addEventListener('blur', toggleLegend);
+
+ 
+  weightInput.addEventListener('input', toggleLegend);
+
+ 
+  toggleLegend();
 }
+
 
 // dim modal
 // Select elements
@@ -585,3 +615,6 @@ function updateShipping() {
     totalRow.innerText = `${shippingPrice} €`;
   }
 }
+
+// displaying legend
+
