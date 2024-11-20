@@ -467,3 +467,121 @@ deliveryOptionsForm.addEventListener('change', handleDeliveryOptionChange);
 // Initialize visibility on page load
 handleDeliveryOptionChange();
 
+// shipping price calculation
+// Shipping prices for each country and delivery method
+const shippingPrices = {
+  de: {
+    domicile: {
+      1: 12.90, 2: 14.90, 3: 14.90, 4: 15.90, 5: 17.90, 6: 22.90, 10: 22.90, 20: 31.40, 30: 41.40
+    }
+  },
+  at: {
+    domicile: {
+      1: 15.90, 2: 18.90, 3: 18.90, 4: 22.40, 5: 24.40, 6: 26.40, 10: 26.40, 20: 48.40, 30: 58.40
+    }
+  },
+  be: {
+    domicile: {
+      1: 12.90, 2: 14.90, 3: 14.90, 4: 15.90, 5: 17.90, 6: 22.90, 10: 22.90, 20: 31.40, 30: 41.40
+    },
+    locker: {
+      1: 5.90, 2: 8.20, 3: 8.02, 4: 9.70, 5: 12.90, 6: 14.40, 10: 14.40, 20: 26.40, 30: 36.40
+    }
+  },
+  es: {
+    locker: {
+      1: 7.50, 2: 9.90, 3: 12.40, 4: 12.40, 5: 15.40, 10: 15.40, 20: 29.40, 30: 39.40
+    }
+  },
+  fr: {
+    locker: {
+      1: 5.40, 2: 6.60, 3: 7.90, 4: 8.90, 5: 12.40, 6: 14.40, 10: 14.40, 20: 22.40, 30: 32.40
+    }
+  },
+  it: {
+    locker: {
+      1: 7.50, 2: 9.90, 3: 12.40, 4: 12.40, 5: 15.40, 10: 15.40, 20: 29.40, 30: 39.40
+    },
+    domicile: {
+      1: 15.90, 2: 18.90, 3: 18.90, 4: 22.40, 5: 24.40, 6: 26.40, 10: 26.40, 20: 48.40, 30: 58.40
+    }
+  },
+  lu: {
+    domicile: {
+      1: 12.90, 2: 14.90, 3: 14.90, 4: 15.90, 5: 17.90, 6: 22.90, 10: 22.90, 20: 31.40, 30: 41.40
+    },
+    locker: {
+      1: 5.90, 2: 8.02, 3: 8.02, 4: 9.70, 5: 12.90, 6: 14.40, 10: 14.40, 20: 26.40, 30: 36.40
+    }
+  },
+  nl: {
+    domicile: {
+      1: 12.90, 2: 14.90, 3: 14.90, 4: 15.90, 5: 17.90, 6: 22.90, 10: 22.90, 20: 31.40, 30: 41.40
+    },
+    locker: {
+      1: 6.40, 2: 8.70, 3: 8.70, 4: 10.70, 5: 12.90, 6: 14.90, 10: 14.90, 20: 29.40, 30: 29.40
+    }
+  },
+  pl: {
+    locker: {
+      1: 9.80, 2: 10.90, 3: 12.20, 4: 15.00, 5: 15.00, 6: 17.70, 10: 21.90, 15: 28.60, 20: 35.60, 25: 42.30, 30: 12.20
+    }
+  },
+  pt: {
+    locker: {
+      1: 7.50, 2: 9.90, 3: 12.40, 4: 12.40, 5: 15.40, 10: 15.40, 20: 29.40, 30: 39.40
+    }
+  }
+};
+
+// Event listeners for form changes
+document.querySelector('#destinationCountry').addEventListener('change', updateShipping);
+document.querySelector('#weight').addEventListener('input', updateShipping);
+document.querySelector('.locker').addEventListener('click', updateShipping);
+document.querySelector('.domicile').addEventListener('click', updateShipping);
+
+function updateShipping() {
+  const country = document.querySelector('#destinationCountry').value;
+  const weight = parseInt(document.querySelector('#weight').value);
+  // const deliveryMethod = document.querySelector('.delivery-method-active') ? 'locker' : 'domicile';
+  let deliveryMethod = '';
+  const deliveryMethods = document.querySelectorAll('.delivery-method');
+  
+  deliveryMethods.forEach((method) => {
+    if (method.classList.contains('delivery-method-active')) {
+      if (method.classList.contains('locker')) {
+        deliveryMethod = 'locker';
+      } else if (method.classList.contains('domicile')) {
+        deliveryMethod = 'domicile';
+      }
+    }
+  });
+ 
+
+  // Get price for selected country, delivery method, and weight
+  let shippingPrice = 0;
+  const priceList = shippingPrices[country] && shippingPrices[country][deliveryMethod];
+
+  if (priceList) {
+    // Find the appropriate price based on weight
+    for (const weightRange in priceList) {
+      const weightThreshold = parseInt(weightRange);
+      if (weight <= weightThreshold) {
+        shippingPrice = priceList[weightThreshold];
+        break;
+      }
+    }
+
+    // Update the shipping price in the table
+    const priceRow = document.querySelector("table tr:nth-child(4) td:last-child");
+    priceRow.innerText = `${shippingPrice} €`;
+
+    // Update the weight in the table
+    const weightRow = document.querySelector("table tr:nth-child(2) td:last-child");
+    weightRow.innerText = `${weight} kg`;
+
+    // Update total amount (assuming no other charges)
+    const totalRow = document.querySelector("table tr:nth-child(5) td:last-child");
+    totalRow.innerText = `${shippingPrice} €`;
+  }
+}
